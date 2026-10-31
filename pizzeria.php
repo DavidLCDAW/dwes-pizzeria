@@ -14,13 +14,13 @@ $base =  $_GET["base"] ?? "";
 $salsa =  $_GET["salsa"] ?? "";
 $ingrediente =  $_GET["ingrediente"]  ?? [];
 
-if (!empty($size) && !empty($base) && !empty($salsa)) {
+if (!empty($size) && !empty($base)) {
     $form = "none";
     $table = "flex";
 
     $size = $sizes[$size] / 100;
     $base = $bases[$base] / 100;
-    $salsa = $salsas[$salsa] / 100;
+    $salsa = !empty($salsa) ? $salsas[$salsa] / 100 : 0;
 
     $total = $size + $base + $salsa;
     foreach ($ingrediente as $value) {
@@ -114,10 +114,14 @@ if (!empty($size) && !empty($base) && !empty($salsa)) {
                     <tr>
                         <th scope="row">Ingredientes</th>
                         <td>
-                            <?php foreach ($ingrediente as $value): ?>
-                                <?= ucfirst($value) . ": " . ($ingredientes[$value] / 100) . "€" ?>
-                                <br>
-                            <?php endforeach ?>
+                            <?php if (empty($ingrediente)): ?>
+                                0€
+                            <?php else: ?>
+                                <?php foreach ($ingrediente as $value): ?>
+                                    <?= ucfirst($value) . ": " . ($ingredientes[$value] / 100) . "€" ?>
+                                    <br>
+                                <?php endforeach ?>
+                            <?php endif ?>
                         </td>
 
                     </tr>
