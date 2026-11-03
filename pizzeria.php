@@ -52,7 +52,7 @@ if (!empty($size) && !empty($base)) {
                         </label>
                         <select name="size" class="form-select">
                             <?php foreach ($sizes as $key => $value): ?>
-                                <option value="<?= $key ?>"><?= $key ?></option>
+                                <option value="<?= $key ?>"><?= $key . ": ". $value / 100 . "€"?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
@@ -63,7 +63,7 @@ if (!empty($size) && !empty($base)) {
                         </label>
                         <select name="base" class="form-select">
                             <?php foreach ($bases as $key => $value): ?>
-                                <option value="<?= $key ?>"><?= $key ?></option>
+                                <option value="<?= $key ?>"><?= $key . ": " . $value / 100 . "€" ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
@@ -76,6 +76,7 @@ if (!empty($size) && !empty($base)) {
                         <?php foreach ($salsas as $key => $value): ?>
                             <?= ucfirst($key) ?>
                             <input type="radio" name="salsa" class="form-check-input" value="<?= $key ?>">
+                                <?= $value / 100 ."€" ?>
                             <br>
                         <?php endforeach ?>
                     </div>
@@ -88,6 +89,7 @@ if (!empty($size) && !empty($base)) {
                         <?php foreach ($ingredientes as $key => $value): ?>
                             <?= ucfirst($key) ?>
                             <input type="checkbox" name="ingrediente[]" class="form-check-input" value="<?= $key ?>">
+                            <?= ": " .$value / 100 ."€" ?>
                             <br>
                         <?php endforeach ?>
                     </div>
