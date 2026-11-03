@@ -18,13 +18,14 @@ if (!empty($size) && !empty($base)) {
     $form = "none";
     $table = "flex";
 
-    $size = $sizes[$size] / 100;
-    $base = $bases[$base] / 100;
-    $salsa = !empty($salsa) ? $salsas[$salsa] / 100 : 0;
+    // $size = $sizes[$size] / 100;
+    $size = $sizes[$size];
+    $base = $bases[$base];
+    $salsa = $salsas[$salsa] ?? 0;
 
     $total = $size + $base + $salsa;
     foreach ($ingrediente as $value) {
-        $precio = $ingredientes[$value] / 100;
+        $precio = $ingredientes[$value];
         $total += $precio;
     }
 }
@@ -103,15 +104,15 @@ if (!empty($size) && !empty($base)) {
                 <table class="table table-striped table-bordered border-secondary shadow">
                     <tr>
                         <th scope="row">Tamaño</th>
-                        <td><?= $size . "€" ?? "" ?></td>
+                        <td><?php printf("%05.2f€", $size / 100) . "€" ?? "" ?></td>
                     </tr>
                     <tr>
                         <th scope="row">Base</th>
-                        <td><?= $base . "€" ?? "" ?></td>
+                        <td><?php printf("%05.2f€", $base / 100 ?? "") ?></td>
                     </tr>
                     <tr>
                         <th scope="row">Salsa</th>
-                        <td><?= $salsa . "€" ?? "" ?></td>
+                        <td><?php printf("%05.2f€", $salsa / 100) . "€" ?? "" ?></td>
                     </tr>
                     <tr>
                         <th scope="row">Ingredientes</th>
@@ -120,7 +121,8 @@ if (!empty($size) && !empty($base)) {
                                 0€
                             <?php else: ?>
                                 <?php foreach ($ingrediente as $value): ?>
-                                    <?= ucfirst($value) . ": " . ($ingredientes[$value] / 100) . "€" ?>
+                                    <?= ucfirst($value) . ": " ?>
+                                    <?php printf("%05.2f€", $ingredientes[$value] / 100) ?>
                                     <br>
                                 <?php endforeach ?>
                             <?php endif ?>
@@ -129,7 +131,7 @@ if (!empty($size) && !empty($base)) {
                     </tr>
                     <tr>
                         <th scope="row">Total</th>
-                        <td><?= $total . "€" ?></td>
+                        <td><?php printf("%05.2f€",$total /100) ?></td>
                     </tr>
                 </table>
             </article>
